@@ -1,0 +1,415 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────
+   Channely — Global Styles
+   macOS system-wide AI text proofreading overlay
+   ─────────────────────────────────────────────────────────── */
+
+/* ── Tailwind 4 Theme Tokens ─────────────────────────────── */
+@theme {
+  /* Brand — warm amber primary */
+  --color-brand-50: #fffbeb;
+  --color-brand-100: #fef3c7;
+  --color-brand-200: #fde68a;
+  --color-brand-300: #fcd34d;
+  --color-brand-400: #fbbf24;
+  --color-brand-500: #f59e0b;
+  --color-brand-600: #d97706;
+  --color-brand-700: #b45309;
+  --color-brand-800: #92400e;
+  --color-brand-900: #78350f;
+  --color-brand-950: #451a03;
+
+  /* Semantic */
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-warning-400: #facc15;
+  --color-warning-500: #eab308;
+  --color-warning-600: #ca8a04;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+
+  /* Surface palette (light) */
+  --color-surface-0: #ffffff;
+  --color-surface-50: #fafafa;
+  --color-surface-100: #f4f4f5;
+  --color-surface-200: #e4e4e7;
+  --color-surface-800: #27272a;
+  --color-surface-900: #18181b;
+  --color-surface-950: #09090b;
+
+  /* Radii */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-glow: 0 0 20px 2px oklch(0.75 0.15 85 / 0.1);
+  --shadow-float: 0 8px 32px -4px oklch(0 0 0 / 0.18),
+    0 2px 8px -2px oklch(0 0 0 / 0.08);
+
+  /* Animations — durations */
+  --animate-shimmer: shimmer 2s ease-in-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-gradient: gradient-shift 6s ease infinite;
+  --animate-slide-up-fade: slide-up-fade 0.3s ease-out;
+  --animate-subtle-bounce: subtle-bounce 0.6s ease-in-out;
+  --animate-cursor-blink: cursor-blink 1s steps(2, start) infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ── CSS Custom Properties ───────────────────────────────── */
+:root {
+  /* Typography */
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Glass */
+  --glass-bg: oklch(1 0 0 / 0.55);
+  --glass-border: oklch(1 0 0 / 0.22);
+  --glass-border-glow: oklch(0.75 0.15 85 / 0.08);
+  --glass-blur: 24px;
+
+  /* Text */
+  --text-primary: #1a1a1a;
+  --text-secondary: #52525b;
+  --text-tertiary: #a1a1aa;
+
+  /* Gradient stops for text-gradient */
+  --gradient-from: #d97706;
+  --gradient-via: #f59e0b;
+  --gradient-to: #b45309;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: oklch(0.15 0.01 60 / 0.55);
+    --glass-border: oklch(1 0 0 / 0.08);
+    --glass-border-glow: oklch(0.75 0.15 85 / 0.12);
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+
+    --gradient-from: #fbbf24;
+    --gradient-via: #f59e0b;
+    --gradient-to: #d97706;
+  }
+}
+
+/* ── Base Reset ──────────────────────────────────────────── */
+html,
+body,
+#root {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ── Keyframes ───────────────────────────────────────────── */
+
+/* Skeleton / placeholder shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Gentle floating for step icons */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Radiating ring pulse — permission status badges */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.75 0.15 85 / 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px oklch(0.75 0.15 85 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.75 0.15 85 / 0);
+  }
+}
+
+/* Animated gradient background shift */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Content appearing — slide up with fade-in */
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gentle scale bounce for interactive feedback */
+@keyframes subtle-bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Streaming cursor blink with smooth step transitions */
+@keyframes cursor-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Subtle box-shadow pulse with brand color for active elements */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px 0 oklch(0.75 0.15 85 / 0.15);
+  }
+  50% {
+    box-shadow: 0 0 18px 4px oklch(0.75 0.15 85 / 0.3);
+  }
+}
+
+/* ── Utility Classes ─────────────────────────────────────── */
+
+/* Glass morphism card with subtle border glow */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 0 0 1px var(--glass-border-glow),
+    var(--shadow-float);
+  will-change: transform;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.15s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-glow);
+  box-shadow:
+    0 0 0 1px oklch(0.75 0.15 85 / 0.15),
+    var(--shadow-glow),
+    0 12px 40px -6px oklch(0 0 0 / 0.22),
+    0 4px 12px -2px oklch(0 0 0 / 0.1);
+}
+
+/* Gradient text for headings */
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-from),
+    var(--gradient-via),
+    var(--gradient-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Shimmer skeleton placeholder */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    oklch(0 0 0 / 0.06) 25%,
+    oklch(0 0 0 / 0.12) 50%,
+    oklch(0 0 0 / 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+  border-radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      oklch(1 0 0 / 0.04) 25%,
+      oklch(1 0 0 / 0.1) 50%,
+      oklch(1 0 0 / 0.04) 75%
+    );
+    background-size: 200% 100%;
+  }
+}
+
+/* Glass card variant for the floating overlay — extra blur & smoothness */
+.glass-card-overlay {
+  background: oklch(1 0 0 / 0.62);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid oklch(0.75 0.15 85 / 0.1);
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 0 0 1px oklch(0.75 0.15 85 / 0.06),
+    var(--shadow-float);
+  will-change: transform, opacity;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.15s ease,
+    opacity 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-card-overlay {
+    background: oklch(0.15 0.01 60 / 0.62);
+    border-color: oklch(0.75 0.15 85 / 0.14);
+    box-shadow:
+      0 0 0 1px oklch(0.75 0.15 85 / 0.08),
+      var(--shadow-float);
+  }
+}
+
+/* Lighter, less saturated gradient for subtitles */
+.text-gradient-subtle {
+  background: linear-gradient(
+    135deg,
+    oklch(0.72 0.1 75),
+    oklch(0.78 0.08 85),
+    oklch(0.7 0.1 65)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-gradient-subtle {
+    background: linear-gradient(
+      135deg,
+      oklch(0.8 0.08 80),
+      oklch(0.85 0.06 90),
+      oklch(0.78 0.08 70)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Titlebar / window drag region */
+.drag-region {
+  cursor: grab;
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.drag-region:active {
+  cursor: grabbing;
+}
+
+/* Diff segment entrance animation */
+.diff-segment-enter {
+  animation: slide-up-fade 200ms ease-out both;
+}
+
+/* ── Custom Scrollbar — macOS-native thin translucent ──── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0 0 0 / 0.18) transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    scrollbar-color: oklch(1 0 0 / 0.15) transparent;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0 0 0 / 0.18);
+  border-radius: var(--radius-pill);
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0 0 0 / 0.32);
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: oklch(1 0 0 / 0.15);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(1 0 0 / 0.28);
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ── Accessibility — Reduced Motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7C3AED"/>
+      <stop offset="100%" style="stop-color:#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="512" cy="512" r="472" fill="url(#bg)"/>
+  <!-- Stylized C -->
+  <path d="M 620 300 A 208 208 0 1 0 620 724" 
+        stroke="rgba(255,255,255,0.94)" stroke-width="104" fill="none" stroke-linecap="round"/>
+  <!-- Main sparkle -->
+  <polygon points="590,280 610,255 630,215 610,255 650,240 610,255 630,280 610,255 590,280" 
+           fill="white" opacity="1"/>
+  <!-- 4-point star large -->
+  <path d="M 610 210 L 620 250 L 630 210 L 625 250 L 660 245 L 625 255 L 660 260 L 625 260 L 630 295 L 620 260 L 610 295 L 615 260 L 580 260 L 615 255 L 580 245 L 615 250 Z" 
+        fill="white" opacity="1"/>
+  <!-- 4-point star medium -->
+  <path d="M 700 420 L 706 445 L 712 420 L 709 445 L 735 442 L 709 448 L 735 455 L 709 452 L 712 475 L 706 452 L 700 475 L 703 452 L 678 455 L 703 448 L 678 442 L 703 445 Z"
+        fill="white" opacity="0.92"/>
+  <!-- Small sparkle -->  
+  <path d="M 510 190 L 514 208 L 518 190 L 516 208 L 534 206 L 516 210 L 534 214 L 516 212 L 518 230 L 514 212 L 510 230 L 512 212 L 494 214 L 512 210 L 494 206 L 512 208 Z"
+        fill="white" opacity="0.84"/>
+  <!-- Dot accents -->
+  <circle cx="650" cy="195" r="8" fill="white" opacity="0.73"/>
+  <circle cx="710" cy="310" r="6" fill="white" opacity="0.73"/>
+  <circle cx="480" cy="155" r="5" fill="white" opacity="0.73"/>
+</svg>
