@@ -338,7 +338,7 @@ pub fn cooldown_elapsed(last_invocation: Instant) -> bool {
 }
 
 pub fn should_capture_for_state(state: ShortcutState) -> bool {
-    state == ShortcutState::Released
+    state == ShortcutState::Pressed
 }
 
 fn overlay_shortcuts_enabled<R: Runtime>(app: &AppHandle<R>) -> bool {
@@ -515,9 +515,9 @@ mod tests {
     }
 
     #[test]
-    fn capture_triggers_only_on_release() {
-        assert!(!should_capture_for_state(ShortcutState::Pressed));
-        assert!(should_capture_for_state(ShortcutState::Released));
+    fn capture_triggers_only_on_press() {
+        assert!(should_capture_for_state(ShortcutState::Pressed));
+        assert!(!should_capture_for_state(ShortcutState::Released));
     }
 
     #[test]
